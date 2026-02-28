@@ -5,17 +5,16 @@ Can be run standalone or via cron.
 """
 
 
-import schedule
-import time
+# import schedule
+# import time
+# import sys, os
 import json
 import logging
 import shutil
 from datetime import datetime, timezone
 from pathlib import Path
-import sys, os
-from dotenv import load_dotenv
-load_dotenv()
-print("API KEY:", os.environ.get("ANTHROPIC_API_KEY"))
+import os
+
 
 # Add parent to path
 from fetcher import crawl_all, save_articles
@@ -146,39 +145,48 @@ def run_pipeline():
 
     return to_publish
 
+# ENTRY POINT FOR DEPLOYMENT / CRON
+if __name__ == "__main__":
+    run_pipeline()
+
+
+
+
+
+
 
 # ── ENTRY POINT ──────────────────────────────────────────────────────────────
-if __name__ == "__main__":
-    import argparse
-    parser = argparse.ArgumentParser(description="Archyards Article Crawler")
-    parser.add_argument(
-        "--run-now",
-        action="store_true",
-        help="Run pipeline immediately instead of waiting for schedule"
-    )
-    parser.add_argument(
-        "--time",
-        default=CONFIG["run_time"],
-        help=f"Daily run time in HH:MM format (default: {CONFIG['run_time']})"
-    )
-    parser.add_argument(
-        "--articles",
-        type=int,
-        default=CONFIG["articles_per_day"],
-        help="Number of articles per day (3-5 recommended)"
-    )
-    args = parser.parse_args()
+# if __name__ == "__main__":
+#     import argparse
+#     parser = argparse.ArgumentParser(description="Archyards Article Crawler")
+#     parser.add_argument(
+#         "--run-now",
+#         action="store_true",
+#         help="Run pipeline immediately instead of waiting for schedule"
+#     )
+#     parser.add_argument(
+#         "--time",
+#         default=CONFIG["run_time"],
+#         help=f"Daily run time in HH:MM format (default: {CONFIG['run_time']})"
+#     )
+#     parser.add_argument(
+#         "--articles",
+#         type=int,
+#         default=CONFIG["articles_per_day"],
+#         help="Number of articles per day (3-5 recommended)"
+#     )
+#     args = parser.parse_args()
 
-    CONFIG["articles_per_day"] = max(3, min(5, args.articles))
-    CONFIG["run_time"] = args.time
+#     CONFIG["articles_per_day"] = max(3, min(5, args.articles))
+#     CONFIG["run_time"] = args.time
 
-    if args.run_now:
-        log.info("▶ Running pipeline immediately…")
-        run_pipeline()
-    else:
-        log.info(f"⏰ Scheduler started. Pipeline will run daily at {CONFIG['run_time']}")
-        schedule.every().day.at(CONFIG["run_time"]).do(run_pipeline)
-        log.info("   Press Ctrl+C to stop.\n")
-        while True:
-            schedule.run_pending()
-            time.sleep(30)
+#     if args.run_now:
+#         log.info("▶ Running pipeline immediately…")
+#         run_pipeline()
+#     else:
+#         log.info(f"⏰ Scheduler started. Pipeline will run daily at {CONFIG['run_time']}")
+#         schedule.every().day.at(CONFIG["run_time"]).do(run_pipeline)
+#         log.info("   Press Ctrl+C to stop.\n")
+#         while True:
+#             schedule.run_pending()
+#             time.sleep(30)
