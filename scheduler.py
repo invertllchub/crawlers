@@ -14,6 +14,10 @@ import shutil
 from datetime import datetime, timezone
 from pathlib import Path
 import os
+import sys
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 
 
 # Add parent to path
@@ -77,15 +81,33 @@ def merge_with_published(new_articles: list[dict]) -> list[dict]:
     return merged
 
 
-def mark_as_published(articles: list[dict]) -> list[dict]:
+# def mark_as_published(articles: list[dict]) -> list[dict]:
+#     """Tag articles with publish timestamp and aggregated badge."""
+#     now = datetime.now(timezone.utc).isoformat()
+#     for a in articles:
+#         a["published_at_archyards"] = now
+#         a["badge"] = "aggregated"
+#         a["status"] = "published"
+#     return articles
+
+def mark_as_published(articles):
     """Tag articles with publish timestamp and aggregated badge."""
+
     now = datetime.now(timezone.utc).isoformat()
+    result = []
+
     for a in articles:
+        # Convert object → dict if needed
+        if hasattr(a, "__dict__"):
+            a = dict(a.__dict__)
+
         a["published_at_archyards"] = now
         a["badge"] = "aggregated"
         a["status"] = "published"
-    return articles
 
+        result.append(a)
+
+    return result
 
 def run_pipeline():
     """Full daily pipeline: crawl → rank → rewrite → publish."""
@@ -107,34 +129,53 @@ def run_pipeline():
     save_articles(articles, CONFIG["raw_path"])
 
     # 3. Rewrite
-    log.info("\n✍  STEP 2: Rewriting with AI engine…")
-    if not CONFIG["api_key"]:
-        log.warning("⚠ ANTHROPIC_API_KEY not set. Skipping rewrite step.")
-        rewritten = [dict(**a, status="pending") for a in [
-            json.loads(json.dumps(a.__dict__ if hasattr(a, '__dict__') else a))
-            for a in articles
-        ]]
-    else:
-        rewritten = run_rewriter(
-            input_path=CONFIG["raw_path"],
-            output_path=CONFIG["rewritten_path"],
-            api_key=CONFIG["api_key"],
-        )
+    # log.info("\n✍  STEP 2: Rewriting with AI engine…")
+    # if not CONFIG["api_key"]:
+    #     log.warning("⚠ ANTHROPIC_API_KEY not set. Skipping rewrite step.")
+    #     rewritten = [dict(**a, status="pending") for a in [
+    #         json.loads(json.dumps(a.__dict__ if hasattr(a, '__dict__') else a))
+    #         for a in articles
+    #     ]]
+    # else:
+    #     rewritten = run_rewriter(
+    #         input_path=CONFIG["raw_path"],
+    #         output_path=CONFIG["rewritten_path"],
+    #         api_key=CONFIG["api_key"],
+    #     )
+
 
     # 4. Mark as published and merge
-    log.info("\n📤 STEP 3: Publishing…")
-    to_publish = [a for a in rewritten if a.get("status") in ("rewritten", "pending")]
+    # log.info("\n📤 STEP 3: Publishing…")
+    # to_publish = [a for a in rewritten if a.get("status") in ("rewritten", "pending")]
+
+    # Publish all rewritten articles (safe pipeline behavior)
+    # to_publish = rewritten if rewritten else []
+    # to_publish = mark_as_published(to_publish)
+
+    # merged = merge_with_published(to_publish)
+
+    # Path(CONFIG["published_path"]).parent.mkdir(parents=True, exist_ok=True)
+    # with open(CONFIG["published_path"], "w", encoding="utf-8") as f:
+    #     json.dump(merged, f, indent=2, ensure_ascii=False)
+
+    # log.info(f"\n✅ Pipeline complete!")
+    # log.info(f"   • {len(to_publish)} new articles published today")
+    # log.info(f"   • {len(merged)} total articles in feed")
+
+
+    log.info("\n📤 STEP 2 & 3: Publishing…")
+
+    to_publish = list(articles) if articles else []
+
     to_publish = mark_as_published(to_publish)
 
     merged = merge_with_published(to_publish)
 
     Path(CONFIG["published_path"]).parent.mkdir(parents=True, exist_ok=True)
+
     with open(CONFIG["published_path"], "w", encoding="utf-8") as f:
         json.dump(merged, f, indent=2, ensure_ascii=False)
 
-    log.info(f"\n✅ Pipeline complete!")
-    log.info(f"   • {len(to_publish)} new articles published today")
-    log.info(f"   • {len(merged)} total articles in feed")
 
     # 5. Print summary
     log.info("\n📋 TODAY'S ARTICLES:")
@@ -147,7 +188,10 @@ def run_pipeline():
 
 # ENTRY POINT FOR DEPLOYMENT / CRON
 if __name__ == "__main__":
-    run_pipeline()
+    try:
+        run_pipeline()
+    except Exception as e:
+       log.error(f"Pipeline failed: {str(e)}")
 
 
 

@@ -63,3 +63,134 @@
 2026-02-28 14:41:25,225 [INFO] HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 401 Unauthorized"
 2026-02-28 14:41:25,248 [INFO]    • 0 new articles published today
 2026-02-28 14:41:25,248 [INFO]    • 0 total articles in feed
+2026-02-28 17:32:58,978 [INFO] ============================================================
+2026-02-28 17:32:59,000 [INFO] ============================================================
+2026-02-28 17:32:59,009 [INFO] Crawling Dezeen — https://www.dezeen.com/feed/
+2026-02-28 17:33:00,161 [INFO]   Found 50 entries
+2026-02-28 17:33:42,195 [INFO] Crawling ArchDaily — https://www.archdaily.com/feed
+2026-02-28 17:33:42,964 [INFO]   Found 18 entries
+2026-02-28 17:34:20,789 [INFO] Crawling Designboom — https://www.designboom.com/feed/
+2026-02-28 17:34:21,438 [INFO]   Found 10 entries
+2026-02-28 17:34:37,733 [INFO] Crawling Wallpaper — https://www.wallpaper.com/rss
+2026-02-28 17:34:38,620 [INFO]   Found 50 entries
+2026-02-28 17:35:15,328 [INFO] Crawling Architectural Digest — https://www.architecturaldigest.com/feed/rss
+2026-02-28 17:35:15,614 [INFO]   Found 30 entries
+2026-02-28 17:35:55,489 [INFO] Crawling Archinect — https://archinect.com/feed/news
+2026-02-28 17:35:55,904 [INFO] Crawling Frame Magazine — https://www.frameweb.com/rss
+2026-02-28 17:35:57,204 [INFO] Crawling Metropolis — https://metropolismag.com/feed/
+2026-02-28 17:35:57,995 [INFO]   Found 0 entries
+2026-02-28 17:35:58,001 [INFO]   1. [Wallpaper] The Leica Leitzphone is a Xiaomi-powered high-end smartphone for photo (score=97.11)
+2026-02-28 17:35:58,002 [INFO]   2. [Wallpaper] How We Host:  This travel entrepreneur gives you permission to care a  (score=96.95)
+2026-02-28 17:35:58,003 [INFO]   3. [Dezeen] Dezeen's top five houses of February 2026 (score=96.34)
+2026-02-28 17:35:58,003 [INFO]   4. [Designboom] cast in red-pigmented concrete, la cacaotera museum celebrates cacao h (score=94.96)
+2026-02-28 17:35:58,004 [INFO]   5. [ArchDaily] Who Decides What Is Worth Preserving? Power and Heritage in Latin Amer (score=93.28)
+2026-02-28 17:46:23,089 [INFO] ============================================================
+2026-02-28 17:46:23,093 [INFO] ============================================================
+2026-02-28 17:46:23,100 [INFO] Crawling Dezeen — https://www.dezeen.com/feed/
+2026-02-28 17:46:24,391 [INFO]   Found 50 entries
+2026-02-28 17:47:05,193 [INFO] Crawling ArchDaily — https://www.archdaily.com/feed
+2026-02-28 17:47:07,384 [INFO]   Found 18 entries
+2026-02-28 17:47:46,525 [INFO] Crawling Designboom — https://www.designboom.com/feed/
+2026-02-28 17:47:47,101 [INFO]   Found 10 entries
+2026-02-28 17:48:02,662 [INFO] Crawling Wallpaper — https://www.wallpaper.com/rss
+2026-02-28 17:48:03,423 [INFO]   Found 50 entries
+2026-02-28 17:48:39,939 [INFO] Crawling Architectural Digest — https://www.architecturaldigest.com/feed/rss
+2026-02-28 17:48:40,374 [INFO]   Found 30 entries
+2026-02-28 17:49:24,339 [INFO] Crawling Archinect — https://archinect.com/feed/news
+2026-02-28 17:49:24,622 [INFO] Crawling Frame Magazine — https://www.frameweb.com/rss
+2026-02-28 17:49:25,504 [INFO] Crawling Metropolis — https://metropolismag.com/feed/
+2026-02-28 17:49:26,256 [INFO]   Found 0 entries
+2026-02-28 17:49:26,261 [INFO]   1. [Wallpaper] The Leica Leitzphone is a Xiaomi-powered high-end smartphone for photo (score=100.23)
+2026-02-28 17:49:26,265 [INFO]   3. [ArchDaily] Rather Two Apartment / OMAMBO (score=95.87)
+2026-02-28 17:49:26,266 [INFO]   4. [Dezeen] Curving metal terrace for potted plants fronts home in Tokyo by HOAA (score=93.66)
+2026-02-28 17:49:26,266 [INFO]   5. [Designboom] cast in red-pigmented concrete, la cacaotera museum celebrates cacao h (score=92.82)
+2026-02-28 19:45:25,832 [INFO] ============================================================
+2026-02-28 19:45:25,836 [INFO] ============================================================
+2026-02-28 19:45:25,842 [INFO] Crawling Dezeen — https://www.dezeen.com/feed/
+2026-02-28 19:45:28,675 [INFO]   Found 50 entries
+2026-02-28 19:46:00,646 [INFO] Crawling ArchDaily — https://www.archdaily.com/feed
+2026-02-28 19:46:03,248 [INFO]   Found 18 entries
+2026-02-28 19:46:39,835 [INFO] Crawling Designboom — https://www.designboom.com/feed/
+2026-02-28 19:46:40,443 [INFO]   Found 10 entries
+2026-02-28 19:46:53,741 [INFO] Crawling Wallpaper — https://www.wallpaper.com/rss
+2026-02-28 19:46:54,580 [INFO]   Found 50 entries
+2026-02-28 19:47:47,781 [INFO] Crawling Architectural Digest — https://www.architecturaldigest.com/feed/rss
+2026-02-28 19:47:48,066 [INFO]   Found 30 entries
+2026-02-28 19:48:22,683 [INFO] Crawling Archinect — https://archinect.com/feed/news
+2026-02-28 19:48:23,061 [INFO] Crawling Frame Magazine — https://www.frameweb.com/rss
+2026-02-28 19:48:24,607 [INFO] Crawling Metropolis — https://metropolismag.com/feed/
+2026-02-28 19:48:25,473 [INFO]   Found 0 entries
+2026-02-28 19:48:25,477 [INFO]   1. [Wallpaper] The Leica Leitzphone is a Xiaomi-powered high-end smartphone for photo (score=97.02)
+2026-02-28 19:48:25,477 [INFO]   2. [Wallpaper] How We Host:  This travel entrepreneur gives you permission to care a  (score=96.32)
+2026-02-28 19:48:25,477 [INFO]   3. [ArchDaily] De Nova Secondary School  / KPW architecten (score=95.75)
+2026-02-28 19:48:25,478 [INFO]   4. [Dezeen] Curving metal terrace for potted plants fronts home in Tokyo by HOAA (score=95.59)
+2026-02-28 19:48:25,478 [INFO]   5. [Dezeen] Dezeen's top five houses of February 2026 (score=91.23)
+2026-02-28 19:57:18,169 [INFO] ============================================================
+2026-02-28 19:57:18,172 [INFO] ============================================================
+2026-02-28 19:57:18,178 [INFO] Crawling Dezeen — https://www.dezeen.com/feed/
+2026-02-28 19:57:18,817 [INFO]   Found 50 entries
+2026-02-28 19:57:49,764 [INFO] Crawling ArchDaily — https://www.archdaily.com/feed
+2026-02-28 19:57:50,578 [INFO]   Found 18 entries
+2026-02-28 19:58:25,100 [INFO] Crawling Designboom — https://www.designboom.com/feed/
+2026-02-28 19:58:25,658 [INFO]   Found 10 entries
+2026-02-28 19:58:43,247 [INFO] Crawling Wallpaper — https://www.wallpaper.com/rss
+2026-02-28 19:58:44,057 [INFO]   Found 50 entries
+2026-02-28 19:59:14,604 [INFO] Crawling Architectural Digest — https://www.architecturaldigest.com/feed/rss
+2026-02-28 19:59:14,847 [INFO]   Found 30 entries
+2026-02-28 19:59:49,262 [INFO] Crawling Archinect — https://archinect.com/feed/news
+2026-02-28 19:59:49,554 [INFO] Crawling Frame Magazine — https://www.frameweb.com/rss
+2026-02-28 19:59:50,317 [INFO] Crawling Metropolis — https://metropolismag.com/feed/
+2026-02-28 19:59:50,992 [INFO]   Found 0 entries
+2026-02-28 19:59:50,996 [INFO]   1. [Wallpaper] The Leica Leitzphone is a Xiaomi-powered high-end smartphone for photo (score=98.99)
+2026-02-28 19:59:50,997 [INFO]   2. [Designboom] stepped white brick facade wraps school group in france by brenac & go (score=98.4)
+2026-02-28 19:59:50,997 [INFO]   3. [Dezeen] Curving metal terrace for potted plants fronts home in Tokyo by HOAA (score=94.9)
+2026-02-28 19:59:50,998 [INFO]   4. [Wallpaper] How We Host:  This travel entrepreneur gives you permission to care a  (score=94.84)
+2026-02-28 19:59:50,998 [INFO]   5. [Designboom] cast in red-pigmented concrete, la cacaotera museum celebrates cacao h (score=93.0)
+2026-02-28 20:21:43,176 [INFO] ============================================================
+2026-02-28 20:21:43,178 [INFO] ============================================================
+2026-02-28 20:21:43,182 [INFO] Crawling Dezeen — https://www.dezeen.com/feed/
+2026-02-28 20:21:43,876 [INFO]   Found 50 entries
+2026-02-28 20:22:13,913 [INFO] Crawling ArchDaily — https://www.archdaily.com/feed
+2026-02-28 20:22:14,644 [INFO]   Found 18 entries
+2026-02-28 20:22:49,975 [INFO] Crawling Designboom — https://www.designboom.com/feed/
+2026-02-28 20:22:50,602 [INFO]   Found 10 entries
+2026-02-28 20:23:06,581 [INFO] Crawling Wallpaper — https://www.wallpaper.com/rss
+2026-02-28 20:23:07,384 [INFO]   Found 50 entries
+2026-02-28 20:23:41,257 [INFO] Crawling Architectural Digest — https://www.architecturaldigest.com/feed/rss
+2026-02-28 20:23:41,538 [INFO]   Found 30 entries
+2026-02-28 20:24:15,410 [INFO] Crawling Archinect — https://archinect.com/feed/news
+2026-02-28 20:24:15,810 [INFO] Crawling Frame Magazine — https://www.frameweb.com/rss
+2026-02-28 20:24:16,625 [INFO] Crawling Metropolis — https://metropolismag.com/feed/
+2026-02-28 20:24:17,399 [INFO]   Found 0 entries
+2026-02-28 20:24:17,405 [INFO]   1. [Wallpaper] The Leica Leitzphone is a Xiaomi-powered high-end smartphone for photo (score=98.45)
+2026-02-28 20:24:17,406 [INFO]   2. [Designboom] stepped white brick facade wraps school group in france by brenac & go (score=98.14)
+2026-02-28 20:24:17,406 [INFO]   3. [Wallpaper] How We Host:  This travel entrepreneur gives you permission to care a  (score=97.19)
+2026-02-28 20:24:17,406 [INFO]   4. [Dezeen] Dezeen's top five houses of February 2026 (score=94.08)
+2026-02-28 20:24:17,407 [INFO]   5. [Dezeen] Curving metal terrace for potted plants fronts home in Tokyo by HOAA (score=93.82)
+2026-02-28 20:24:17,414 [ERROR] Pipeline failed: 'Article' object does not support item assignment
+2026-02-28 20:36:09,801 [INFO] ============================================================
+2026-02-28 20:36:09,805 [INFO] ============================================================
+2026-02-28 20:36:09,810 [INFO] Crawling Dezeen — https://www.dezeen.com/feed/
+2026-02-28 20:36:10,532 [INFO]   Found 50 entries
+2026-02-28 20:36:40,322 [INFO] Crawling ArchDaily — https://www.archdaily.com/feed
+2026-02-28 20:36:41,078 [INFO]   Found 18 entries
+2026-02-28 20:37:16,747 [INFO] Crawling Designboom — https://www.designboom.com/feed/
+2026-02-28 20:37:17,265 [INFO]   Found 10 entries
+2026-02-28 20:37:32,913 [INFO] Crawling Wallpaper — https://www.wallpaper.com/rss
+2026-02-28 20:37:33,727 [INFO]   Found 50 entries
+2026-02-28 20:38:09,135 [INFO] Crawling Architectural Digest — https://www.architecturaldigest.com/feed/rss
+2026-02-28 20:38:09,484 [INFO]   Found 30 entries
+2026-02-28 20:38:45,277 [INFO] Crawling Archinect — https://archinect.com/feed/news
+2026-02-28 20:38:45,544 [INFO] Crawling Frame Magazine — https://www.frameweb.com/rss
+2026-02-28 20:38:46,324 [INFO] Crawling Metropolis — https://metropolismag.com/feed/
+2026-02-28 20:38:47,029 [INFO]   Found 0 entries
+2026-02-28 20:38:47,032 [INFO]   1. [Designboom] stepped white brick facade wraps school group in france by brenac & go (score=101.53)
+2026-02-28 20:38:47,033 [INFO]   2. [Wallpaper] The Leica Leitzphone is a Xiaomi-powered high-end smartphone for photo (score=98.43)
+2026-02-28 20:38:47,033 [INFO]   3. [Wallpaper] How We Host:  This travel entrepreneur gives you permission to care a  (score=96.01)
+2026-02-28 20:38:47,033 [INFO]   4. [Dezeen] Curving metal terrace for potted plants fronts home in Tokyo by HOAA (score=94.88)
+2026-02-28 20:38:47,034 [INFO]   5. [ArchDaily] De Nova Secondary School  / KPW architecten (score=92.41)
+2026-02-28 20:38:47,044 [INFO]   1. [Designboom] stepped white brick facade wraps school group in france by brenac & go
+2026-02-28 20:38:47,044 [INFO]   2. [Wallpaper] The Leica Leitzphone is a Xiaomi-powered high-end smartphone for photo
+2026-02-28 20:38:47,044 [INFO]   3. [Wallpaper] How We Host:  This travel entrepreneur gives you permission to care a 
+2026-02-28 20:38:47,045 [INFO]   4. [Dezeen] Curving metal terrace for potted plants fronts home in Tokyo by HOAA
+2026-02-28 20:38:47,045 [INFO]   5. [ArchDaily] De Nova Secondary School  / KPW architecten
