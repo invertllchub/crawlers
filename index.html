@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Archyards Crawler Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --black: #0a0a0a; --yellow: #e8d84b; --red: #c8392b;
+    --green: #2ecc71; --white: #f5f2ec; --gray: #333;
+  }
+  body { background: var(--black); color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 14px; }
+
+  header {
+    background: #111; border-bottom: 1px solid #222;
+    padding: 1rem 2rem; display: flex; align-items: center; gap: 1rem;
+  }
+  .logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: var(--yellow); }
+  .subtitle { font-size: 0.7rem; opacity: 0.4; letter-spacing: 0.2em; text-transform: uppercase; }
+
+  .status-bar {
+    background: #0f0f0f; padding: 0.6rem 2rem;
+    display: flex; gap: 2rem; align-items: center;
+    border-bottom: 1px solid #1a1a1a;
+    font-size: 0.72rem;
+  }
+  .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; }
+  .dot-green { background: var(--green); box-shadow: 0 0 6px var(--green); }
+  .dot-yellow { background: var(--yellow); }
+  .dot-red { background: var(--red); }
+
+  main { padding: 2rem; max-width: 1400px; }
+
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem;
+  }
+  .stat-card {
+    background: #111; border: 1px solid #1e1e1e; padding: 1.2rem 1.5rem;
+  }
+  .stat-label { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.4; margin-bottom: 0.5rem; }
+  .stat-value { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--yellow); line-height: 1; }
+  .stat-sub { font-size: 0.65rem; opacity: 0.4; margin-top: 0.3rem; }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem;
+    letter-spacing: 0.1em; margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .section-title::after {
+    content: ''; flex: 1; height: 1px; background: #1e1e1e;
+  }
+
+  .articles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1rem; margin-bottom: 2.5rem; }
+
+  .article-card {
+    background: #111; border: 1px solid #1e1e1e; overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .article-card:hover { border-color: #333; }
+
+  .article-img {
+    width: 100%; height: 160px; object-fit: cover; background: #1a1a1a;
+    display: block;
+  }
+  .article-img-placeholder {
+    width: 100%; height: 160px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.65rem; opacity: 0.2; letter-spacing: 0.1em;
+  }
+
+  .article-body { padding: 1rem; }
+  .article-meta {
+    display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.6rem; flex-wrap: wrap;
+  }
+  .badge {
+    font-size: 0.55rem; letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 0.2rem 0.5rem; font-weight: 500;
+  }
+  .badge-aggregated { background: var(--yellow); color: var(--black); }
+  .badge-rewritten { background: var(--green); color: var(--black); }
+  .badge-pending { background: #333; color: var(--white); }
+  .badge-failed { background: var(--red); color: var(--white); }
+
+  .source-tag { font-size: 0.65rem; opacity: 0.5; }
+  .score-tag { font-size: 0.65rem; opacity: 0.4; margin-left: auto; font-family: 'DM Mono', monospace; }
+
+  .article-original-title { font-size: 0.75rem; opacity: 0.4; margin-bottom: 0.4rem; line-height: 1.4; }
+  .article-title { font-size: 0.9rem; line-height: 1.4; margin-bottom: 0.6rem; font-weight: 500; }
+  .article-desc { font-size: 0.75rem; opacity: 0.5; line-height: 1.6; max-height: 72px; overflow: hidden; }
+
+  .article-footer {
+    padding: 0.6rem 1rem; border-top: 1px solid #1a1a1a;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.65rem; opacity: 0.4;
+  }
+  .article-footer a { color: var(--yellow); text-decoration: none; opacity: 1; }
+
+  .sources-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.5rem; margin-bottom: 2.5rem; }
+  .source-item {
+    background: #111; border: 1px solid #1e1e1e; padding: 0.8rem 1rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .source-name { font-size: 0.8rem; }
+  .source-count { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--yellow); }
+
+  .log-box {
+    background: #0d0d0d; border: 1px solid #1a1a1a; padding: 1rem;
+    font-family: 'DM Mono', monospace; font-size: 0.7rem;
+    line-height: 1.8; max-height: 300px; overflow-y: auto;
+    color: rgba(245,242,236,0.6);
+  }
+  .log-info { color: rgba(245,242,236,0.5); }
+  .log-success { color: var(--green); }
+  .log-warning { color: var(--yellow); }
+  .log-error { color: var(--red); }
+
+  .btn {
+    font-family: 'DM Sans', sans-serif; font-size: 0.7rem; letter-spacing: 0.15em;
+    text-transform: uppercase; padding: 0.6rem 1.5rem; border: none; cursor: pointer;
+    transition: all 0.2s; font-weight: 500;
+  }
+  .btn-primary { background: var(--yellow); color: var(--black); }
+  .btn-primary:hover { background: var(--white); }
+  .btn-outline { background: none; color: var(--white); border: 1px solid #333; }
+  .btn-outline:hover { border-color: var(--white); }
+
+  .controls { display: flex; gap: 0.8rem; margin-bottom: 2rem; align-items: center; }
+
+  .empty-state { padding: 3rem; text-align: center; opacity: 0.3; font-size: 0.8rem; }
+
+  .tab-bar { display: flex; gap: 0; border-bottom: 1px solid #1e1e1e; margin-bottom: 1.5rem; }
+  .tab {
+    padding: 0.6rem 1.2rem; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+    cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; background: none;
+    color: var(--white); border-left: none; border-right: none; border-top: none;
+    opacity: 0.4;
+  }
+  .tab.active { border-bottom-color: var(--yellow); color: var(--yellow); opacity: 1; }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo">ARCHYARDS <span style="color:rgba(255,255,255,0.2)">CRAWLER</span></div>
+    <div class="subtitle">Aggregation &amp; Rewrite Engine</div>
+  </div>
+  <div style="margin-left:auto; display:flex; gap:0.8rem;">
+    <button class="btn btn-outline" onclick="refreshDashboard()">↻ Refresh</button>
+    <button class="btn btn-primary" onclick="triggerPipeline()">▶ Run Pipeline Now</button>
+  </div>
+</header>
+
+<div class="status-bar">
+  <span><span class="status-dot dot-green" id="status-dot"></span><span id="status-text">Ready</span></span>
+  <span>Last run: <strong id="last-run">—</strong></span>
+  <span>Next run: <strong id="next-run">07:00 daily</strong></span>
+  <span>API: <span id="api-url" style="opacity:0.6">http://localhost:5001</span></span>
+</div>
+
+<main>
+  <!-- Stats -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-label">Total Articles</div>
+      <div class="stat-value" id="stat-total">—</div>
+      <div class="stat-sub">In feed</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Published Today</div>
+      <div class="stat-value" id="stat-today">—</div>
+      <div class="stat-sub">New articles</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Sources Active</div>
+      <div class="stat-value" id="stat-sources">8</div>
+      <div class="stat-sub">Crawled sites</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Rewrite Rate</div>
+      <div class="stat-value" id="stat-rewrite">—</div>
+      <div class="stat-sub">Success %</div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <div class="tab-bar">
+      <button class="tab active" onclick="showTab('all')">All Articles</button>
+      <button class="tab" onclick="showTab('today')">Today</button>
+      <button class="tab" onclick="showTab('sources')">Sources</button>
+      <button class="tab" onclick="showTab('logs')">Logs</button>
+    </div>
+  </div>
+
+  <!-- Articles Tab -->
+  <div id="tab-all">
+    <div class="section-title">Published Articles</div>
+    <div class="articles-grid" id="articles-container">
+      <div class="empty-state">No articles yet. Run the pipeline to fetch articles.</div>
+    </div>
+  </div>
+
+  <!-- Today Tab -->
+  <div id="tab-today" style="display:none">
+    <div class="section-title">Today's Articles</div>
+    <div class="articles-grid" id="today-container">
+      <div class="empty-state">No articles published today yet.</div>
+    </div>
+  </div>
+
+  <!-- Sources Tab -->
+  <div id="tab-sources" style="display:none">
+    <div class="section-title">Source Breakdown</div>
+    <div class="sources-list" id="sources-container"></div>
+  </div>
+
+  <!-- Logs Tab -->
+  <div id="tab-logs" style="display:none">
+    <div class="section-title">Pipeline Logs</div>
+    <div class="log-box" id="log-box">
+      <div class="log-info">Waiting for pipeline run…</div>
+    </div>
+  </div>
+</main>
+
+<script>
+  const API = 'http://localhost:5001/api';
+  let allArticles = [];
+
+  async function fetchData() {
+    try {
+      const [health, articles, today] = await Promise.all([
+        fetch(`${API}/health`).then(r => r.json()).catch(() => null),
+        fetch(`${API}/articles?limit=50`).then(r => r.json()).catch(() => ({ articles: [], total: 0 })),
+        fetch(`${API}/articles/today`).then(r => r.json()).catch(() => ({ articles: [], count: 0 })),
+      ]);
+
+      allArticles = articles.articles || [];
+      const todayArts = today.articles || [];
+
+      // Stats
+      document.getElementById('stat-total').textContent = articles.total ?? '—';
+      document.getElementById('stat-today').textContent = today.count ?? '—';
+      const rewritten = allArticles.filter(a => a.status === 'rewritten').length;
+      const rate = allArticles.length ? Math.round(rewritten / allArticles.length * 100) : 0;
+      document.getElementById('stat-rewrite').textContent = rate + '%';
+
+      if (health) {
+        document.getElementById('last-run').textContent =
+          health.last_updated ? new Date(health.last_updated).toLocaleString() : '—';
+      }
+
+      renderArticles(allArticles, 'articles-container');
+      renderArticles(todayArts, 'today-container');
+      renderSources(allArticles);
+
+    } catch (e) {
+      addLog(`API connection failed: ${e.message}. Start the Python API server first.`, 'error');
+    }
+  }
+
+  function renderArticles(articles, containerId) {
+    const container = document.getElementById(containerId);
+    if (!articles.length) {
+      container.innerHTML = '<div class="empty-state">No articles found.</div>';
+      return;
+    }
+    container.innerHTML = articles.map(a => `
+      <div class="article-card">
+        ${a.image_url
+          ? `<img class="article-img" src="${a.image_url}" alt="" onerror="this.style.display='none'">`
+          : `<div class="article-img-placeholder">NO IMAGE</div>`
+        }
+        <div class="article-body">
+          <div class="article-meta">
+            <span class="badge badge-aggregated">Aggregated</span>
+            <span class="badge badge-${a.status === 'rewritten' ? 'rewritten' : a.status === 'rewrite_failed' ? 'failed' : 'pending'}">
+              ${a.status === 'rewritten' ? '✓ AI Rewritten' : a.status === 'rewrite_failed' ? '✗ Failed' : '⏳ Pending'}
+            </span>
+            <span class="source-tag">${a.source_name}</span>
+            <span class="score-tag">⭐ ${a.popularity_score}</span>
+          </div>
+          ${a.rewritten_title ? `
+            <div class="article-original-title">Original: ${a.original_title}</div>
+            <div class="article-title">${a.rewritten_title}</div>
+            <div class="article-desc">${a.rewritten_description || ''}</div>
+          ` : `
+            <div class="article-title">${a.original_title}</div>
+            <div class="article-desc">${a.original_description?.slice(0, 200) || ''}</div>
+          `}
+        </div>
+        <div class="article-footer">
+          <span>${a.category} · ${new Date(a.published_at).toLocaleDateString()}</span>
+          <a href="${a.url}" target="_blank" rel="noopener">Source →</a>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function renderSources(articles) {
+    const counts = {};
+    articles.forEach(a => {
+      counts[a.source_name] = (counts[a.source_name] || 0) + 1;
+    });
+    const sorted = Object.entries(counts).sort((a,b) => b[1]-a[1]);
+    document.getElementById('sources-container').innerHTML = sorted.map(([name, count]) => `
+      <div class="source-item">
+        <span class="source-name">${name}</span>
+        <span class="source-count">${count}</span>
+      </div>
+    `).join('') || '<div class="empty-state">No data.</div>';
+  }
+
+  function addLog(msg, type = 'info') {
+    const box = document.getElementById('log-box');
+    const time = new Date().toLocaleTimeString();
+    const cls = type === 'error' ? 'log-error' : type === 'success' ? 'log-success' : type === 'warning' ? 'log-warning' : 'log-info';
+    box.innerHTML += `<div class="${cls}">[${time}] ${msg}</div>`;
+    box.scrollTop = box.scrollHeight;
+  }
+
+  function showTab(tab) {
+    ['all','today','sources','logs'].forEach(t => {
+      document.getElementById(`tab-${t}`).style.display = t === tab ? '' : 'none';
+    });
+    document.querySelectorAll('.tab').forEach((btn, i) => {
+      btn.classList.toggle('active', ['all','today','sources','logs'][i] === tab);
+    });
+  }
+
+  async function triggerPipeline() {
+    addLog('▶ Triggering pipeline manually…', 'info');
+    showTab('logs');
+    document.getElementById('status-dot').className = 'status-dot dot-yellow';
+    document.getElementById('status-text').textContent = 'Running…';
+    addLog('Pipeline triggered. Check terminal / scheduler.log for live output.', 'warning');
+    addLog('Run: python scheduler/scheduler.py --run-now', 'info');
+    setTimeout(() => {
+      document.getElementById('status-dot').className = 'status-dot dot-green';
+      document.getElementById('status-text').textContent = 'Ready';
+      fetchData();
+    }, 3000);
+  }
+
+  function refreshDashboard() {
+    addLog('Refreshing data…', 'info');
+    fetchData();
+  }
+
+  // Init
+  addLog('Dashboard loaded. Connecting to API…', 'info');
+  fetchData();
+  setInterval(fetchData, 30000); // Auto-refresh every 30s
+</script>
+</body>
+</html>
